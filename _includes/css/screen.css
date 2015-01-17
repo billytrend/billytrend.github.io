@@ -274,3 +274,8 @@ sup {
   vertical-align: super;
   font-size: smaller;
 }
+
+.about {
+  display: inline-block;
+  margin-bottom: 10px;
+}
