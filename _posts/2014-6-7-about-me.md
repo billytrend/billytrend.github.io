@@ -44,7 +44,13 @@ I am also used to using ancillary development tools such as libraries in all the
 
 ---
 
-*Summer 2014* : cmless.io - self-started web-based cms backed by a stateless database driven api.
+*August 2015* : [Fire Tech](http://www.firetechcamp.com/) - Instructor
+
+*June - July 2015* : [Cambridge Consultants](http://www.cambridgeconsultants.com/) - Full stack developer intern
+
+*January 2015* : Solvapli - App developer
+
+*Summer 2014* : cmless.io - self-started web-based cms backed by a stateless database driven api
 
 *Summer 2014* : Web application developer for the St Andrews observatory
 
