@@ -26,8 +26,6 @@ I am also used to using ancillary development tools such as libraries in all the
 
 ---
 
-[cmless.io](https://cmless.io)
-
 [St Andrews Catwalk](http://www.catwalkstandrews.co.uk) [[Permalink]](http://www.catwalkstandrews.co.uk.s3-website-eu-west-1.amazonaws.com)
 
 [Trend on Travel](http://www.trendontravel.com) [[Permalink]](http://www.trendontravel.com.s3-website-us-east-1.amazonaws.com)

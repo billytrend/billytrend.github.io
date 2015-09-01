@@ -8,3 +8,7 @@ I built a website based on desgins by Maisie Franklin for Boris Johnson's mother
 
 [www.charlottejohnsonwahl.com](http://www.charlottejohnsonwahl.com)
 
+### Press
+
+[Telegraph: Artist Charlotte Johnson Wahl: far more than just 'Boris's mum'](http://www.telegraph.co.uk/art/artists/charlotte-johnson-boris-genius-mother/)
+
