@@ -10,26 +10,6 @@ layout : post
 
 ---
 
-I'm fascinated by everything computer related. I've been developing websites since I was ten and I am now very competent in making complex interactive web applications. I'm very excited and optimistic about the future of technology.
-
-I'm currently looking to engage with problems which have wider reach so that I can prove my skills in real-life, large scale environments.
-
-#### Experience
-
----
-
-I have programming experience in **javascript** (browser and server), **java**, **python**, **Haskell** and **C**.
-
-I am also used to using ancillary development tools such as libraries in all the above languages and their respective package managers; build tools such as **make**, **gulp** and **grunt**; version control systems **git**, **mercurial** and **subversion**; packaging systems **NPM**, **Pip** and **Cabal**; databases **SQL** and **MongoDB**; **Unix**-like operating systems **linux** and **OS X**; markup languages **markdown**, **html/css** and **latex**.
-
-#### Portfolio
-
----
-
-[St Andrews Catwalk](http://www.catwalkstandrews.co.uk) [[Permalink]](http://www.catwalkstandrews.co.uk.s3-website-eu-west-1.amazonaws.com)
-
-[Trend on Travel](http://www.trendontravel.com) [[Permalink]](http://www.trendontravel.com.s3-website-us-east-1.amazonaws.com)
-
 #### Education
 
 ---
@@ -41,6 +21,8 @@ I am also used to using ancillary development tools such as libraries in all the
 #### Employment
 
 ---
+
+*August 2016 - present* : Bloomberg - .Net developer
 
 *August 2015* : [Fire Tech](http://www.firetechcamp.com/) - Instructor
 
