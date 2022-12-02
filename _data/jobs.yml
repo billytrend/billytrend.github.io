@@ -1,7 +1,7 @@
 - name: Palantir
   image: palantir
   date: January 2018 - present
-  description: Cloud developer
+  description: Frontend infrastructure
 
 - name: Microsoft
   image: microsoft
