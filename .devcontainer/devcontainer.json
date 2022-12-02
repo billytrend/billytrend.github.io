@@ -1,0 +1,14 @@
+{
+    "customizations": {
+      "codespaces": {
+        "repositories": {
+          "billytrend/billytrend.github.io": {
+            "permissions": {
+              "contents": "write"
+            }
+          }
+        }
+      }
+    }
+  }
+  
