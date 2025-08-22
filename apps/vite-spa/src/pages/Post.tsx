@@ -1,4 +1,5 @@
 import React, { Suspense, useEffect, useState } from 'react';
+import 'github-markdown-css/github-markdown-light.css';
 import { useParams, Link } from 'react-router-dom';
 
 const postModules = import.meta.glob('../posts/*.mdx');
@@ -27,10 +28,10 @@ export default function PostPage() {
   const Content = post.Content;
 
   return (
-    <article>
-      <p className="meta">{post.meta.date} &nbsp; <Link to="/">Home</Link></p>
-      <h1 className="title">{post.meta.title}</h1>
-      <div id="post">
+    <article className="post-container">
+      <p className="meta">{post.meta.date} &nbsp; <Link to="/" className="text-blue-600 hover:underline">Home</Link></p>
+      <h1 className="title mt-2">{post.meta.title}</h1>
+      <div id="post" className="mt-4 markdown-body prose prose-sm sm:prose lg:prose-lg">
         <Suspense fallback={<div>Loading post…</div>}>
           <Content />
         </Suspense>

@@ -56,16 +56,22 @@ function BlogList() {
   console.debug('[BlogList] posts:', posts.map((p) => ({ path: p.path, slug: slugFromPath(p.path) })));
 
   return (
-    <div>
-      <h2 style={{ color: '#236080' }}>▮ Blog Posts</h2>
-      <ul className="posts">
+    <div className="post-container">
+      <h2 className="title">▮ Blog Posts</h2>
+      <div className="mt-4 grid gap-4">
         {sorted.map(({ path, meta }) => (
-          <li key={path}>
-            <span>{meta.date}</span>
-            <Link to={`/post/${slugFromPath(path)}`}>{meta.title}</Link>
-          </li>
+          <article key={path} className="bg-gray-50 rounded-md p-4 border">
+            <div className="flex items-center justify-between">
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900">
+                  <Link to={`/article/${slugFromPath(path)}`} className="hover:text-blue-600">{meta.title}</Link>
+                </h3>
+                <p className="meta">{meta.date}</p>
+              </div>
+            </div>
+          </article>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

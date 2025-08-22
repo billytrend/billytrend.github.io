@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Small design tokens */
+:root {
+  --content-max: 65ch;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  background-color: #f9fafb; /* bg-gray-50 */
+  color: #1f2937; /* text-gray-800 */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+.prose-img {
+  border-radius: 0.5rem; /* rounded-lg */
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05); /* shadow-sm */
+}
+
+.title {
+  font-size: 1.875rem; /* text-3xl */
+  font-weight: 800; /* font-extrabold */
+  letter-spacing: -0.025em; /* tracking-tight */
+  color: #111827; /* text-gray-900 */
+}
+
+.meta {
+  font-size: 0.875rem; /* text-sm */
+  color: #6b7280; /* text-gray-500 */
+}
+
+.post-container {
+  max-width: var(--content-max);
+}

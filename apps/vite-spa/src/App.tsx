@@ -9,7 +9,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<BlogList />} />
-          <Route path="/post/:slug" element={<PostPage />} />
+          <Route path="/article/:slug" element={<PostPage />} />
           <Route path="*" element={<BlogList />} />
         </Routes>
       </Layout>
