@@ -14,12 +14,94 @@ html, body, #root {
 }
 
 body {
-  background-color: #f9fafb; /* bg-gray-50 */
-  color: #1f2937; /* text-gray-800 */
+  background-color: var(--bg, #f7f4ef); /* paper */
+  color: var(--text, #111827); /* sumi */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  font-family: 'Noto Sans JP', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
+
+/* Light theme variables */
+:root {
+  --bg: #f7f4ef;
+  --card: #ffffff;
+  --text: #111827;
+  --muted: #6b7280;
+  --accent: #4338ca;
+}
+
+/* Dark theme overrides when .dark class is present on <html> */
+html.dark {
+  --bg: #0b1220; /* near-black navy */
+  --card: #081224;
+  --text: #e6eef8; /* light sumi */
+  --muted: #9aa6b2;
+  --accent: #7c5cff;
+}
+
+/* Smooth typography color transitions */
+.prose, .title, .meta, .card, h1, h2, h3, h4, h5, h6, p, a {
+  transition: color 0.4s ease, background-color 0.4s ease, border-color 0.4s ease;
+}
+
+/* Dark mode prose tweaks */
+html.dark .prose code {
+  background-color: rgba(255,255,255,0.06);
+  color: var(--text);
+}
+html.dark .prose pre code {
+  background: transparent;
+}
+html.dark a {
+  color: var(--accent);
+}
+html.dark a:hover {
+  text-decoration: underline;
+}
+
+/* Dark mode overrides for GitHub markdown-styled post content */
+html.dark .markdown-body {
+  background-color: transparent !important;
+  color: var(--text) !important;
+}
+html.dark .markdown-body a {
+  color: var(--accent) !important;
+}
+html.dark .markdown-body h1,
+html.dark .markdown-body h2,
+html.dark .markdown-body h3,
+html.dark .markdown-body h4,
+html.dark .markdown-body h5,
+html.dark .markdown-body h6 {
+  color: var(--text) !important;
+}
+html.dark .markdown-body blockquote {
+  color: var(--muted) !important;
+  border-left-color: rgba(255,255,255,0.25) !important;
+}
+html.dark .markdown-body code,
+html.dark .markdown-body pre code {
+  background-color: rgba(255,255,255,0.06) !important;
+  color: var(--text) !important;
+}
+html.dark .markdown-body pre {
+  background-color: #101b2d !important;
+  border: 1px solid rgba(255,255,255,0.08) !important;
+}
+html.dark .markdown-body table td,
+html.dark .markdown-body table th {
+  border-color: rgba(255,255,255,0.15) !important;
+}
+html.dark .markdown-body hr {
+  background-color: rgba(255,255,255,0.12) !important;
+}
+
+/* Scrollbar (webkit) subtle styling */
+*::-webkit-scrollbar { width: 10px; }
+*::-webkit-scrollbar-track { background: transparent; }
+*::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 6px; }
+html.dark *::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.15); }
 
 .prose-img {
   border-radius: 0.5rem; /* rounded-lg */
@@ -39,5 +121,17 @@ body {
 }
 
 .post-container {
+  max-width: var(--content-max);
+}
+
+/* Utility: simple card styling for minimalist look */
+.card {
+  background: var(--card, white);
+  border-radius: 0.5rem;
+  box-shadow: 0 1px 6px rgba(17, 24, 39, 0.06);
+}
+
+/* Make prose use the typography plugin styles */
+.prose {
   max-width: var(--content-max);
 }

@@ -1,4 +1,5 @@
-import React, { Suspense, useEffect, useState } from 'react';
+// React default import not required with automatic JSX runtime; keep hooks below
+import { Suspense, useEffect, useState } from 'react';
 import 'github-markdown-css/github-markdown-light.css';
 import { useParams, Link } from 'react-router-dom';
 
@@ -28,10 +29,13 @@ export default function PostPage() {
   const Content = post.Content;
 
   return (
-    <article className="post-container">
-      <p className="meta">{post.meta.date} &nbsp; <Link to="/" className="text-blue-600 hover:underline">Home</Link></p>
-      <h1 className="title mt-2">{post.meta.title}</h1>
-      <div id="post" className="mt-4 markdown-body prose prose-sm sm:prose lg:prose-lg">
+    <article className="post-container" style={{ color: 'var(--text)' }}>
+      <p className="meta" style={{ color: 'var(--muted)' }}>{post.meta.date} &nbsp; <Link to="/" className="hover:underline" style={{ color: 'var(--accent)' }}>Home</Link></p>
+      <h1 className="title mt-2 relative" style={{ color: 'var(--text)' }}>
+        <span className="relative z-10">{post.meta.title}</span>
+        <span className="absolute inset-x-0 -bottom-1 h-2 bg-gradient-to-r from-[var(--accent)]/0 via-[var(--accent)]/20 to-[var(--accent)]/0 pointer-events-none" />
+      </h1>
+      <div id="post" className="mt-4 markdown-body prose prose-sm sm:prose lg:prose-lg" style={{ color: 'var(--muted)' }}>
         <Suspense fallback={<div>Loading post…</div>}>
           <Content />
         </Suspense>

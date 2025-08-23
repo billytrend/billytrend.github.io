@@ -7,21 +7,20 @@ export default function Sidebar() {
     : '/logo.png';
 
   return (
-    <nav className="text-sm text-gray-700">
-      <a href="/" className="block text-center">
-        <img src={gravatarSrc} className="w-40 h-40 rounded-full mx-auto mb-4 object-cover" alt="My photo" />
-      </a>
-
-      <div className="border-t border-b py-4 mt-4">
-        <p className="text-base font-medium text-gray-900">{theme.name}</p>
-        <p className="text-sm font-light mt-1">{theme.tagline}</p>
-        <p className="mt-3">
-          <a className="text-blue-700 font-semibold" href={`mailto:${theme.email}`}>{theme.email}</a>
-        </p>
+    <nav className="text-sm text-sumi-muted">
+      <div className="card p-6 text-center">
+        <a href="/" className="block">
+          <img src={gravatarSrc} className="w-32 h-32 rounded-full mx-auto mb-4 object-cover" alt="My photo" />
+          <p className="text-lg font-medium text-sumi">{theme.name}</p>
+          <p className="text-sm mt-1 text-sumi-muted">{theme.tagline}</p>
+          <p className="mt-3">
+            <a className="text-accent font-semibold hover:text-accent-light" href={`mailto:${theme.email}`}>{theme.email}</a>
+          </p>
+        </a>
       </div>
 
       <div className="mt-4">
-        <a className="inline-block text-blue-600 font-semibold hover:underline" href="/about-me.html">About Me</a>
+        <a className="inline-block text-accent font-semibold hover:underline" href="/about-me.html">About Me</a>
       </div>
     </nav>
   );

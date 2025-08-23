@@ -57,16 +57,34 @@ function BlogList() {
 
   return (
     <div className="post-container">
-      <h2 className="title">▮ Blog Posts</h2>
+  <h2 className="title" style={{ color: 'var(--text)' }}>▮ Blog Posts</h2>
       <div className="mt-4 grid gap-4">
         {sorted.map(({ path, meta }) => (
-          <article key={path} className="bg-gray-50 rounded-md p-4 border">
+          <article
+            key={path}
+            className="rounded-md p-4 border shadow-sm group transition-colors hover:shadow md:hover:shadow-md"
+            style={{
+              backgroundColor: 'var(--card)',
+              color: 'var(--text)',
+              borderColor: 'rgba(0,0,0,0.07)',
+            }}
+          >
             <div className="flex items-center justify-between">
               <div>
-                <h3 className="text-lg font-semibold text-gray-900">
-                  <Link to={`/article/${slugFromPath(path)}`} className="hover:text-blue-600">{meta.title}</Link>
+                <h3 className="text-lg font-semibold" style={{ color: 'var(--text)' }}>
+                  <Link
+                    to={`/article/${slugFromPath(path)}`}
+                    className="relative inline-block focus:outline-none"
+                    style={{
+                      color: 'var(--text)',
+                    }}
+                  >
+                    <span className="bg-gradient-to-r from-[var(--accent)]/0 via-[var(--accent)]/10 to-[var(--accent)]/0 bg-[length:0%_2px] bg-no-repeat bg-left-bottom group-hover:bg-[length:100%_2px] transition-[background-size] duration-500">
+                      {meta.title}
+                    </span>
+                  </Link>
                 </h3>
-                <p className="meta">{meta.date}</p>
+                <p className="meta" style={{ color: 'var(--muted)' }}>{meta.date}</p>
               </div>
             </div>
           </article>
