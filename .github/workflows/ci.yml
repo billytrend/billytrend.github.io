@@ -26,13 +26,13 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Typecheck
-  working-directory: packages/billytrend.com
-  run: pnpm tsc -b --pretty false
+        working-directory: packages/billytrend.com
+        run: pnpm tsc -b --pretty false
 
       - name: Build SPA
-  working-directory: packages/billytrend.com
-  run: pnpm build
+        working-directory: packages/billytrend.com
+        run: pnpm build
 
       - name: Lint
-  working-directory: packages/billytrend.com
-  run: pnpm lint
+        working-directory: packages/billytrend.com
+        run: pnpm lint

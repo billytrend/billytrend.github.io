@@ -34,8 +34,8 @@ jobs:
         run: pnpm install --frozen-lockfile
 
       - name: Build SPA
-  working-directory: packages/billytrend.com
-  run: pnpm build
+        working-directory: packages/billytrend.com
+        run: pnpm build
 
       - name: Deploy preview to workers.dev
         working-directory: packages/cf-worker
