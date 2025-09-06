@@ -1,13 +1,15 @@
 // React default import not required with automatic JSX runtime; keep hooks below
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect, useState, type ComponentType } from 'react';
 import 'github-markdown-css/github-markdown-light.css';
 import { useParams, Link } from 'react-router-dom';
 
-const postModules = import.meta.glob('../posts/*.mdx');
+type Frontmatter = { title?: string; date?: string; [key: string]: unknown };
+type MdxModule = { default: ComponentType; frontmatter?: Frontmatter; meta?: Frontmatter };
+const postModules = import.meta.glob<MdxModule>('../posts/*.mdx');
 
 export default function PostPage() {
   const { slug } = useParams();
-  const [post, setPost] = useState<any>(null);
+  const [post, setPost] = useState<{ meta: Frontmatter; Content: ComponentType } | null>(null);
 
   useEffect(() => {
     if (!slug) return;
@@ -19,8 +21,8 @@ export default function PostPage() {
       console.warn('[Post] no match for slug', slug);
       return;
     }
-    (postModules as any)[matchKey]().then((mod: any) => {
-      setPost({ meta: mod.frontmatter || mod.meta || {}, Content: mod.default });
+    postModules[matchKey]().then((mod) => {
+      setPost({ meta: mod.frontmatter ?? mod.meta ?? {}, Content: mod.default });
     });
   }, [slug]);
 

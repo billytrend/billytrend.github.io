@@ -1,23 +1,27 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type ComponentType } from 'react';
 import { Link } from 'react-router-dom';
 
 // Import all MDX files in the posts directory
-const postModules = import.meta.glob('./posts/*.mdx');
-const rawModules = import.meta.glob('./posts/*.mdx', { as: 'raw' });
+type Frontmatter = { title?: string; date?: string; [key: string]: unknown };
+type MdxModule = { default: ComponentType; frontmatter?: Frontmatter; meta?: Frontmatter };
+type PostEntry = { path: string; meta: Frontmatter; Content: ComponentType };
+
+const postModules = import.meta.glob<MdxModule>('./posts/*.mdx');
+const rawModules = import.meta.glob<string>('./posts/*.mdx', { as: 'raw' });
 
 function BlogList() {
-  const [posts, setPosts] = useState<any[]>([]);
+  const [posts, setPosts] = useState<PostEntry[]>([]);
 
   // Load all posts on mount
   useEffect(() => {
     Promise.all(
       Object.entries(postModules).map(async ([path, loader]) => {
-        const mod: any = await loader();
-        let meta = mod.frontmatter || mod.meta || {};
+        const mod = await (loader as () => Promise<MdxModule>)();
+        const meta: Frontmatter = mod.frontmatter ?? mod.meta ?? {};
         // try to parse raw frontmatter if title is missing
         if ((!meta || !meta.title) && rawModules[path]) {
           try {
-            const raw: string = await (rawModules as any)[path]();
+            const raw: string = await rawModules[path]();
             const fmMatch = raw.match(/^-{3}[\s\S]*?-{3}/);
             if (fmMatch) {
               const fm = fmMatch[0].replace(/^-{3}|-{3}$/g, '').trim();
@@ -30,7 +34,7 @@ function BlogList() {
                 if (key === 'date') meta.date = val;
               });
             }
-          } catch (e) {
+          } catch {
             // ignore
           }
         }

@@ -11,6 +11,6 @@
     "preview": "wrangler dev --remote"
   },
   "devDependencies": {
-    "wrangler": "^3.102.0"
+    "wrangler": "^4.34.0"
   }
 }

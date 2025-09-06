@@ -8,7 +8,7 @@ export default function ThemeToggle() {
       if (val === 'light') return false;
       // fallback to system preference
       return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-    } catch (e) {
+    } catch {
       return false;
     }
   });

@@ -1,0 +1,86 @@
+name: PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+jobs:
+  preview:
+    runs-on: ubuntu-latest
+    concurrency:
+      group: pr-preview-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    permissions:
+      contents: read
+      pull-requests: write
+    env:
+  CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  PREVIEW_NAME: billytrend-spa-pr-${{ github.event.pull_request.number }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+
+      - name: Build SPA
+        run: pnpm -C packages/billytrend.com build
+
+      - name: Deploy preview to workers.dev
+        working-directory: packages/cf-worker
+        run: pnpm exec wrangler deploy --env preview --name "$PREVIEW_NAME"
+        id: deploy
+
+      - name: Construct preview URL
+        id: url
+        run: |
+          if [ -z "${{ vars.CF_WORKERS_SUBDOMAIN }}" ]; then
+            echo "CF_WORKERS_SUBDOMAIN repo variable is not set. Set it to your account's workers.dev subdomain (e.g. 'example' for example.workers.dev)." >&2
+          fi
+          echo "url=https://${PREVIEW_NAME}.${{ vars.CF_WORKERS_SUBDOMAIN }}.workers.dev" >> $GITHUB_OUTPUT
+
+      - name: Comment preview link
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          header: preview-link
+          message: |
+            Preview deployed: ${{ steps.url.outputs.url }}
+
+  cleanup:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+  CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+  CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+  PREVIEW_NAME: billytrend-spa-pr-${{ github.event.pull_request.number }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Delete preview worker
+        working-directory: packages/cf-worker
+        run: pnpm exec wrangler delete --name "$PREVIEW_NAME" --force || true
