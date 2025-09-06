@@ -39,16 +39,31 @@ jobs:
 
       - name: Deploy preview to workers.dev
         working-directory: packages/cf-worker
-        run: pnpm exec wrangler deploy --env preview --name "$PREVIEW_NAME"
         id: deploy
+        run: |
+          set -euo pipefail
+          # Run deploy, mirror output to logs, and capture it for parsing
+          OUT=$(pnpm exec wrangler deploy --env preview --name "$PREVIEW_NAME" | tee /dev/stderr || true)
+          # Extract a workers.dev URL if present in output
+          URL=$(printf '%s\n' "$OUT" | sed -nE 's#.*(https://[A-Za-z0-9-]+\.[A-Za-z0-9-]+\.workers\.dev).*#\1#p' | tail -n1)
+          if [ -n "${URL:-}" ]; then
+            echo "url=$URL" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Construct preview URL
         id: url
         run: |
-          if [ -z "${{ vars.CF_WORKERS_SUBDOMAIN }}" ]; then
-            echo "CF_WORKERS_SUBDOMAIN repo variable is not set. Set it to your account's workers.dev subdomain (e.g. 'example' for example.workers.dev)." >&2
+          set -euo pipefail
+          SUBDOMAIN='${{ vars.CF_WORKERS_SUBDOMAIN }}'
+          DEPLOY_URL='${{ steps.deploy.outputs.url }}'
+          if [ -n "$SUBDOMAIN" ]; then
+            echo "url=https://${PREVIEW_NAME}.${SUBDOMAIN}.workers.dev" >> "$GITHUB_OUTPUT"
+          elif [ -n "$DEPLOY_URL" ]; then
+            echo "url=$DEPLOY_URL" >> "$GITHUB_OUTPUT"
+          else
+            echo "Could not determine preview URL. Either set CF_WORKERS_SUBDOMAIN repo variable or ensure wrangler outputs a workers.dev URL." >&2
+            exit 1
           fi
-          echo "url=https://${PREVIEW_NAME}.${{ vars.CF_WORKERS_SUBDOMAIN }}.workers.dev" >> $GITHUB_OUTPUT
 
       - name: Comment preview link
         uses: marocchino/sticky-pull-request-comment@v2
