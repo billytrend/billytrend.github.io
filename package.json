@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev:worker": "pnpm -C packages/cf-worker dev",
+    "deploy:worker": "pnpm -C packages/cf-worker deploy",
+    "preview:worker": "pnpm -C packages/cf-worker preview"
   },
   "keywords": [],
   "author": "",

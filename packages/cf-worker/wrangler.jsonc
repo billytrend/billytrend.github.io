@@ -1,0 +1,10 @@
+{
+  "name": "billytrend-spa",
+  "compatibility_date": "2025-09-06",
+  "workers_dev": true,
+  "assets": {
+    "directory": "../billytrend.com/dist",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "single-page-application"
+  }
+}

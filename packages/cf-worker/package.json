@@ -1,0 +1,16 @@
+{
+  "name": "cf-worker",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "predev": "pnpm -C ../billytrend.com build",
+    "dev": "wrangler dev",
+    "predeploy": "pnpm -C ../billytrend.com build",
+    "deploy": "wrangler deploy",
+    "preview": "wrangler dev --remote"
+  },
+  "devDependencies": {
+    "wrangler": "^3.102.0"
+  }
+}
