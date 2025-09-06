@@ -4,9 +4,10 @@ import mdx from '@mdx-js/rollup';
 import tailwindcss from '@tailwindcss/vite'
 import fs from 'node:fs';
 import path from 'node:path';
+import type { IncomingMessage } from 'node:http';
 
 function dirIndexPlugin(): Plugin {
-  const rewrite = (req: any, root: string) => {
+  const rewrite = (req: IncomingMessage & { url?: string }, root: string) => {
     try {
       if (!req.url) return;
       const url = new URL(req.url, 'http://localhost');
