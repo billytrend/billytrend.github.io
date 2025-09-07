@@ -50,11 +50,26 @@ jobs:
             echo "url=$URL" >> "$GITHUB_OUTPUT"
           fi
 
+      - name: Fetch workers.dev subdomain
+        id: subdomain
+        run: |
+          set -euo pipefail
+          API="https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers/subdomain"
+          RESP=$(curl -fsSL -H "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" "$API" || true)
+          SUB=$(printf '%s' "$RESP" | sed -nE 's/.*"subdomain":"([^"]+)".*/\1/p')
+          if [ -n "${SUB:-}" ]; then
+            echo "subdomain=$SUB" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Construct preview URL
         id: url
         run: |
           set -euo pipefail
-          SUBDOMAIN='${{ vars.CF_WORKERS_SUBDOMAIN }}'
+          # Prefer fetched subdomain, then repo variable, then deploy output
+          SUBDOMAIN='${{ steps.subdomain.outputs.subdomain }}'
+          if [ -z "$SUBDOMAIN" ]; then
+            SUBDOMAIN='${{ vars.CF_WORKERS_SUBDOMAIN }}'
+          fi
           DEPLOY_URL='${{ steps.deploy.outputs.url }}'
           if [ -n "$SUBDOMAIN" ]; then
             echo "url=https://${PREVIEW_NAME}.${SUBDOMAIN}.workers.dev" >> "$GITHUB_OUTPUT"
