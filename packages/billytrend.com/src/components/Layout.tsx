@@ -2,6 +2,7 @@ import React from 'react';
 import Sidebar from './Sidebar';
 import Footer from './Footer';
 import ThemeToggle from './ThemeToggle';
+import { Link } from 'react-router-dom';
 
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -11,13 +12,13 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         style={{ backgroundColor: 'var(--bg)', borderColor: 'var(--line)' }}
       >
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between gap-4">
-          <a
-            href="/"
+          <Link
+            to="/"
             className="text-xl font-black tracking-tight focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)]"
             style={{ color: 'var(--text)' }}
           >
             Billy Trend
-          </a>
+          </Link>
           <div className="flex gap-3 items-center">
             <ThemeToggle />
           </div>

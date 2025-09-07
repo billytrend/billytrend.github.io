@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import theme from '../theme.json';
 
 export default function Sidebar() {
@@ -7,8 +8,8 @@ export default function Sidebar() {
   return (
     <nav className="text-sm" aria-label="Sidebar">
       <div className="card p-6 text-center">
-        <a
-          href="/"
+        <Link
+          to="/"
           className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)]"
         >
           <img
@@ -20,7 +21,7 @@ export default function Sidebar() {
           <p className="text-base tracking-wide" style={{ color: 'var(--text)' }}>
             {theme.name}
           </p>
-        </a>
+        </Link>
         <p className="mt-4">
           <a
             className="font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)]"
