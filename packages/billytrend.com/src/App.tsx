@@ -1,7 +1,7 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import BlogList from './BlogList';
-import PostPage from './pages/Post';
 import Layout from './components/Layout';
+import PostPage from './pages/Post';
 
 function App() {
   return (
@@ -9,7 +9,7 @@ function App() {
       <Layout>
         <Routes>
           <Route path="/" element={<BlogList />} />
-          <Route path="/article/:slug" element={<PostPage />} />
+          <Route path="/articles/:slug" element={<PostPage />} />
           <Route path="*" element={<BlogList />} />
         </Routes>
       </Layout>
