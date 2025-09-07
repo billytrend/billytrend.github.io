@@ -50,7 +50,9 @@ export default function ThemeToggle() {
           root.classList.toggle('dark', next);
           try {
             localStorage.setItem('theme', next ? 'dark' : 'light');
-          } catch {}
+          } catch {
+            // localStorage write can fail (e.g., private mode); ignore errors
+          }
           setDark(next);
           // remove the guard after transition frame
           requestAnimationFrame(() => {
