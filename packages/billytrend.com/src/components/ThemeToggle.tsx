@@ -51,7 +51,8 @@ export default function ThemeToggle() {
           try {
             localStorage.setItem('theme', next ? 'dark' : 'light');
           } catch {
-            // localStorage write can fail (e.g., private mode); ignore errors
+            // localStorage write can fail (e.g., private mode); ignore
+            void 0;
           }
           setDark(next);
           // remove the guard after transition frame
