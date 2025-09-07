@@ -110,4 +110,4 @@ jobs:
 
       - name: Delete preview worker
         working-directory: packages/cf-worker
-        run: pnpm exec wrangler delete --name "$PREVIEW_NAME" --force || true
+        run: pnpm exec wrangler delete --name "$PREVIEW_NAME" --force

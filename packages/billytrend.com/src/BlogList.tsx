@@ -97,7 +97,11 @@ function BlogList() {
         {recent.length === 0 && (
           <div
             className="p-4 border text-sm"
-            style={{ backgroundColor: 'var(--card)', color: 'var(--muted)', borderColor: 'var(--line)' }}
+            style={{
+              backgroundColor: 'var(--card)',
+              color: 'var(--muted)',
+              borderColor: 'var(--line)',
+            }}
           >
             No posts from the last 10 years.
           </div>
@@ -120,7 +124,7 @@ function BlogList() {
                   style={{ color: 'var(--text)' }}
                 >
                   <Link
-                    to={`/article/${slugFromPath(path)}`}
+                    to={`/articles/${slugFromPath(path)}`}
                     className="relative inline-block focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)]"
                     style={{
                       color: 'var(--text)',
@@ -145,7 +149,11 @@ function BlogList() {
               type="button"
               onClick={() => setShowOlder(true)}
               className="px-4 py-2 border font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)]"
-              style={{ backgroundColor: 'var(--card)', color: 'var(--text)', borderColor: 'var(--line)' }}
+              style={{
+                backgroundColor: 'var(--card)',
+                color: 'var(--text)',
+                borderColor: 'var(--line)',
+              }}
               aria-expanded={false}
             >
               Show older posts ({older.length})
@@ -172,7 +180,7 @@ function BlogList() {
                       style={{ color: 'var(--text)' }}
                     >
                       <Link
-                        to={`/article/${slugFromPath(path)}`}
+                        to={`/articles/${slugFromPath(path)}`}
                         className="relative inline-block focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)]"
                         style={{
                           color: 'var(--text)',
