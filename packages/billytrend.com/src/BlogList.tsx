@@ -47,7 +47,7 @@ function BlogList() {
           meta,
           Content: mod.default,
         };
-      })
+      }),
     ).then(setPosts);
   }, []);
 
@@ -59,32 +59,50 @@ function BlogList() {
   });
 
   // helper: build slug from filename
-  const slugFromPath = (p: string) => p.split('/').pop()!.replace(/\.mdx?$/, '');
-  console.debug('[BlogList] posts:', posts.map((p) => ({ path: p.path, slug: slugFromPath(p.path) })));
+  const slugFromPath = (p: string) =>
+    p
+      .split('/')
+      .pop()!
+      .replace(/\.mdx?$/, '');
+  console.debug(
+    '[BlogList] posts:',
+    posts.map((p) => ({ path: p.path, slug: slugFromPath(p.path) })),
+  );
 
   return (
     <div className="post-container">
-    <div className="grid gap-2">
+      <div className="grid gap-2">
         {sorted.map(({ path, meta }) => (
           <article
             key={path}
-      className="p-4 border group transition-colors focus-within:ring-2 focus-within:ring-[var(--accent)]"
-      style={{ backgroundColor: 'var(--card)', color: 'var(--text)', borderColor: 'var(--line)' }}
+            className="p-4 border group transition-colors focus-within:ring-2 focus-within:ring-[var(--accent)]"
+            style={{
+              backgroundColor: 'var(--card)',
+              color: 'var(--text)',
+              borderColor: 'var(--line)',
+            }}
           >
             <div className="flex items-center justify-between">
               <div>
-        <h3 className="text-lg font-semibold tracking-tight" style={{ color: 'var(--text)' }}>
+                <h3
+                  className="text-lg font-semibold tracking-tight"
+                  style={{ color: 'var(--text)' }}
+                >
                   <Link
                     to={`/article/${slugFromPath(path)}`}
-          className="relative inline-block focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)]"
+                    className="relative inline-block focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)]"
                     style={{
                       color: 'var(--text)',
                     }}
                   >
-          <span className="inline-block border-b border-transparent group-hover:border-[var(--accent)] transition-colors duration-200">{meta.title}</span>
+                    <span className="inline-block border-b border-transparent group-hover:border-[var(--accent)] transition-colors duration-200">
+                      {meta.title}
+                    </span>
                   </Link>
                 </h3>
-        <p className="meta" style={{ color: 'var(--muted)' }}>{meta.date}</p>
+                <p className="meta" style={{ color: 'var(--muted)' }}>
+                  {meta.date}
+                </p>
               </div>
             </div>
           </article>

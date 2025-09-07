@@ -40,7 +40,10 @@ function urlToLocalPath(resourceUrl: string): string {
   }
   try {
     const u = new URL(resourceUrl);
-    if (u.origin === new URL(BASE_URL).origin && resourceUrl.startsWith(new URL(BASE_URL).origin + '/st-andrews-algol-compiler/')) {
+    if (
+      u.origin === new URL(BASE_URL).origin &&
+      resourceUrl.startsWith(new URL(BASE_URL).origin + '/st-andrews-algol-compiler/')
+    ) {
       const rel = u.pathname.replace(/^\/st-andrews-algol-compiler\//, '');
       return path.join(OUT_DIR, rel);
     }
@@ -86,7 +89,8 @@ async function scrape() {
 
     try {
       const { buf, contentType } = await fetchBuffer(url);
-      const isHtml = (contentType || '').includes('text/html') || url.endsWith('.html') || url.endsWith('/');
+      const isHtml =
+        (contentType || '').includes('text/html') || url.endsWith('.html') || url.endsWith('/');
       const destPath = urlToLocalPath(url.endsWith('/') ? url + 'index.html' : url);
       if (isHtml) {
         const html = buf.toString('utf-8');

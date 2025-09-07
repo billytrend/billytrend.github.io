@@ -19,8 +19,28 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['Inter', 'Zen Kaku Gothic Antique', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial'],
-        mono: ['IBM Plex Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
+        sans: [
+          'Inter',
+          'Zen Kaku Gothic Antique',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
+          'Segoe UI',
+          'Roboto',
+          'Helvetica Neue',
+          'Arial',
+        ],
+        mono: [
+          'IBM Plex Mono',
+          'ui-monospace',
+          'SFMono-Regular',
+          'Menlo',
+          'Monaco',
+          'Consolas',
+          'Liberation Mono',
+          'Courier New',
+          'monospace',
+        ],
       },
       spacing: {
         content: '65ch',
@@ -36,7 +56,7 @@ module.exports = {
               paddingBottom: '2px',
               '&:hover': {
                 color: 'var(--text)',
-                backgroundImage: `linear-gradient(to right, color-mix(in oklab, var(--accent) 12%, transparent), transparent)`
+                backgroundImage: `linear-gradient(to right, color-mix(in oklab, var(--accent) 12%, transparent), transparent)`,
               },
             },
             h1: {

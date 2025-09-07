@@ -5,17 +5,17 @@
   "workers_dev": true,
   "routes": [
     { "pattern": "billytrend.com", "custom_domain": true },
-    { "pattern": "www.billytrend.com", "custom_domain": true }
+    { "pattern": "www.billytrend.com", "custom_domain": true },
   ],
   "assets": {
     "directory": "../billytrend.com/dist",
     "html_handling": "auto-trailing-slash",
-    "not_found_handling": "single-page-application"
+    "not_found_handling": "single-page-application",
   },
   "env": {
     "preview": {
       "workers_dev": true,
-      "routes": []
-    }
-  }
+      "routes": [],
+    },
+  },
 }

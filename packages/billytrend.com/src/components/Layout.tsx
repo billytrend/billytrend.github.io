@@ -6,7 +6,10 @@ import ThemeToggle from './ThemeToggle';
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg)' }}>
-      <header className="border-b" style={{ backgroundColor: 'var(--bg)', borderColor: 'var(--line)' }}>
+      <header
+        className="border-b"
+        style={{ backgroundColor: 'var(--bg)', borderColor: 'var(--line)' }}
+      >
         <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between gap-4">
           <a
             href="/"
@@ -32,9 +35,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             </aside>
 
             <main id="content" className="lg:col-span-6" role="main">
-              <div className="card p-8 transition-colors">
-                {children}
-              </div>
+              <div className="card p-8 transition-colors">{children}</div>
 
               <div className="mt-10">
                 <Footer />

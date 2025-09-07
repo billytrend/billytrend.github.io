@@ -8,7 +8,9 @@
     "dev": "wrangler dev",
     "predeploy": "pnpm -C ../billytrend.com build",
     "deploy": "wrangler deploy",
-    "preview": "wrangler dev --remote"
+    "preview": "wrangler dev --remote",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "devDependencies": {
     "wrangler": "^4.34.0"

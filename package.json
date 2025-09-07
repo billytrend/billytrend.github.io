@@ -8,7 +8,9 @@
     "dev": "pnpm -C packages/billytrend.com dev",
     "dev:worker": "pnpm -C packages/cf-worker dev",
     "deploy:worker": "pnpm -C packages/cf-worker deploy",
-    "preview:worker": "pnpm -C packages/cf-worker preview"
+    "preview:worker": "pnpm -C packages/cf-worker preview",
+    "format": "prettier --write .",
+    "format:check": "prettier --check ."
   },
   "keywords": [],
   "author": "",
@@ -24,6 +26,7 @@
   "devDependencies": {
     "autoprefixer": "^10.4.21",
     "cheerio": "^1.1.2",
+    "prettier": "^3.3.3",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.12",
     "tsx": "^4.20.5"
