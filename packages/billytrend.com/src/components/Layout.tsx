@@ -28,7 +28,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="max-w-7xl mx-auto px-6">
           {/* Grid: left sidebar, centered content, right gutter using 12 columns */}
           <div className="lg:grid lg:grid-cols-12 lg:gap-8">
-            <aside className="lg:col-span-3">
+            <aside className="hidden lg:block lg:col-span-3">
               <div className="lg:sticky lg:top-24">
                 <Sidebar />
               </div>
