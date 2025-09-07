@@ -3,8 +3,7 @@ import { Suspense, useEffect, useState, type ComponentType } from 'react';
 import 'github-markdown-css/github-markdown-light.css';
 import { useParams, Link } from 'react-router-dom';
 
-type Frontmatter = { title?: string; date?: string; [key: string]: unknown };
-type MdxModule = { default: ComponentType; frontmatter?: Frontmatter; meta?: Frontmatter };
+import type { Frontmatter, MdxModule } from '../types';
 const postModules = import.meta.glob<MdxModule>('../posts/*.mdx');
 
 export default function PostPage() {
@@ -30,12 +29,13 @@ export default function PostPage() {
     });
   }, [slug]);
 
-  if (!post)
+  if (!post) {
     return (
-      <div role="status" aria-live="polite">
+      <div role="status" aria-live="polite" aria-busy="true">
         Loading post…
       </div>
     );
+  }
 
   const Content = post.Content;
 

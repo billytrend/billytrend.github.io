@@ -1,9 +1,8 @@
-import { useState, useEffect, type ComponentType } from 'react';
+import { useState, useEffect, useMemo, useCallback, type ComponentType } from 'react';
 import { Link } from 'react-router-dom';
 
 // Import all MDX files in the posts directory
-type Frontmatter = { title?: string; date?: string; [key: string]: unknown };
-type MdxModule = { default: ComponentType; frontmatter?: Frontmatter; meta?: Frontmatter };
+import type { Frontmatter, MdxModule } from './types';
 type PostEntry = { path: string; meta: Frontmatter; Content: ComponentType };
 
 const postModules = import.meta.glob<MdxModule>('./posts/*.mdx');
@@ -53,46 +52,62 @@ function BlogList() {
   }, []);
 
   // helpers
-  const slugFromPath = (p: string) =>
-    p
-      .split('/')
-      .pop()!
-      .replace(/\.mdx?$/, '');
+  const slugFromPath = useCallback(
+    (p: string) =>
+      p
+        .split('/')
+        .pop()!
+        .replace(/\.mdx?$/, ''),
+    [],
+  );
 
-  const timeFrom = (entry: PostEntry): number => {
-    // prefer frontmatter date
-    if (entry.meta?.date) {
-      const t = new Date(entry.meta.date).getTime();
-      if (!Number.isNaN(t)) return t;
-    }
-    // fallback: parse from slug YYYY-M-D-...
-    const slug = slugFromPath(entry.path);
-    const m = slug.match(/^(\d{4}-\d{1,2}-\d{1,2})-/);
-    if (m) {
-      const t = new Date(m[1]).getTime();
-      if (!Number.isNaN(t)) return t;
-    }
-    return 0; // treat undated as oldest
-  };
+  const timeFrom = useCallback(
+    (entry: PostEntry): number => {
+      // prefer frontmatter date
+      if (entry.meta?.date) {
+        const t = new Date(entry.meta.date).getTime();
+        if (!Number.isNaN(t)) return t;
+      }
+      // fallback: parse from slug YYYY-M-D-...
+      const slug = slugFromPath(entry.path);
+      const m = slug.match(/^(\d{4}-\d{1,2}-\d{1,2})-/);
+      if (m) {
+        const t = new Date(m[1]).getTime();
+        if (!Number.isNaN(t)) return t;
+      }
+      return 0; // treat undated as oldest
+    },
+    [slugFromPath],
+  );
 
   // sort posts by date desc
-  const sorted = posts.slice().sort((a, b) => timeFrom(b) - timeFrom(a));
+  const sorted = useMemo(
+    () => posts.slice().sort((a, b) => timeFrom(b) - timeFrom(a)),
+    [posts, timeFrom],
+  );
 
   // split into last 10 years vs older
   const now = new Date();
   const cutoff = new Date(now); // 10-year cutoff from today
   cutoff.setFullYear(now.getFullYear() - 10);
   const cutoffMs = cutoff.getTime();
-  const recent = sorted.filter((p) => timeFrom(p) >= cutoffMs);
-  const older = sorted.filter((p) => timeFrom(p) < cutoffMs);
+  const [recent, older] = useMemo(() => {
+    const r: typeof posts = [];
+    const o: typeof posts = [];
+    for (const p of sorted) {
+      (timeFrom(p) >= cutoffMs ? r : o).push(p);
+    }
+    return [r, o];
+  }, [sorted, cutoffMs, timeFrom]);
 
   console.debug(
     '[BlogList] posts:',
     posts.map((p) => ({ path: p.path, slug: slugFromPath(p.path) })),
   );
 
+  const isLoading = posts.length === 0;
   return (
-    <div className="post-container">
+    <div className="post-container" aria-busy={isLoading} aria-live="polite">
       <div className="grid gap-2">
         {recent.length === 0 && (
           <div
@@ -131,7 +146,7 @@ function BlogList() {
                     }}
                   >
                     <span className="inline-block border-b border-transparent group-hover:border-[var(--accent)] transition-colors duration-200">
-                      {meta.title}
+                      {meta.title || slugFromPath(path)}
                     </span>
                   </Link>
                 </h3>
@@ -187,7 +202,7 @@ function BlogList() {
                         }}
                       >
                         <span className="inline-block border-b border-transparent group-hover:border-[var(--accent)] transition-colors duration-200">
-                          {meta.title}
+                          {meta.title || slugFromPath(path)}
                         </span>
                       </Link>
                     </h3>

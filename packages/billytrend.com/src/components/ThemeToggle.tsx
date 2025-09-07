@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 
-export default function ThemeToggle() {
+function ThemeToggle() {
   const [dark, setDark] = useState<boolean>(() => {
     try {
       const val = localStorage.getItem('theme');
@@ -54,9 +54,13 @@ export default function ThemeToggle() {
           }
           setDark(next);
           // remove the guard after transition frame
-          requestAnimationFrame(() => {
-            setTimeout(() => document.documentElement.classList.remove('theme-switching'), 0);
-          });
+          if (typeof requestAnimationFrame === 'function') {
+            requestAnimationFrame(() => {
+              setTimeout(() => document.documentElement.classList.remove('theme-switching'), 0);
+            });
+          } else {
+            document.documentElement.classList.remove('theme-switching');
+          }
         };
         if (!doc.startViewTransition || reduceMotion) {
           apply();
@@ -94,3 +98,5 @@ export default function ThemeToggle() {
     </button>
   );
 }
+
+export default memo(ThemeToggle);
