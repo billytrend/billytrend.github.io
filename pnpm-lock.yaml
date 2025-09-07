@@ -45,6 +45,15 @@ importers:
 
   packages/billytrend.com:
     dependencies:
+      '@fontsource-variable/jetbrains-mono':
+        specifier: ^5.2.6
+        version: 5.2.6
+      '@fontsource-variable/plus-jakarta-sans':
+        specifier: ^5.2.6
+        version: 5.2.6
+      '@fontsource-variable/space-grotesk':
+        specifier: ^5.2.9
+        version: 5.2.9
       '@mdx-js/mdx':
         specifier: 3.1.0
         version: 3.1.0(acorn@8.15.0)
@@ -632,6 +641,15 @@ packages:
   '@eslint/plugin-kit@0.3.5':
     resolution: {integrity: sha512-Z5kJ+wU3oA7MMIqVR9tyZRtjYPr4OC004Q4Rw7pgOKUOKkJfZ3O24nz3WYfGRpMDNmcOi3TwQOmgm7B7Tpii0w==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@fontsource-variable/jetbrains-mono@5.2.6':
+    resolution: {integrity: sha512-1pvtyK6H1paBOixbtZ9xfQgArVQ4SJMW3WSGZPOd5PiW3yg0t8umwKnjDMzW2ofb7qSdiXnsnIaHPT36vEOdlg==}
+
+  '@fontsource-variable/plus-jakarta-sans@5.2.6':
+    resolution: {integrity: sha512-w0954jYDlHvzABXY5NgkBtitBiHcULblm1cScowZrRV5V6KtgB17Ubw3knFr82P3qvN48kgQk5DLPhB27OlTnQ==}
+
+  '@fontsource-variable/space-grotesk@5.2.9':
+    resolution: {integrity: sha512-4VnXk51fypXV+2okrmz7s0ckBZWIhvEgSVKNgRKGLxb5wpQZi5xZuzX+MalVwCUh36Gve3uG2vqCVuQkrHccRA==}
 
   '@fortawesome/fontawesome-free@7.0.0':
     resolution: {integrity: sha512-X48nISrSOa89zu2VMljC4XaRf8NmgTwQBVHfS2Nu5G00ZwM31oOVrAtGxZF3b6wDYf9lJsf/Eq4cCSFKIkOWPQ==}
@@ -3006,6 +3024,12 @@ snapshots:
     dependencies:
       '@eslint/core': 0.15.2
       levn: 0.4.1
+
+  '@fontsource-variable/jetbrains-mono@5.2.6': {}
+
+  '@fontsource-variable/plus-jakarta-sans@5.2.6': {}
+
+  '@fontsource-variable/space-grotesk@5.2.9': {}
 
   '@fortawesome/fontawesome-free@7.0.0': {}
 

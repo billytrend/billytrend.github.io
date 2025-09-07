@@ -20,7 +20,7 @@ module.exports = {
       },
       fontFamily: {
         sans: [
-          'Inter',
+          'Plus Jakarta Sans',
           'Zen Kaku Gothic Antique',
           'ui-sans-serif',
           'system-ui',
@@ -31,7 +31,7 @@ module.exports = {
           'Arial',
         ],
         mono: [
-          'IBM Plex Mono',
+          'JetBrains Mono',
           'ui-monospace',
           'SFMono-Regular',
           'Menlo',
@@ -40,6 +40,13 @@ module.exports = {
           'Liberation Mono',
           'Courier New',
           'monospace',
+        ],
+        display: [
+          'Space Grotesk',
+          'Plus Jakarta Sans',
+          'ui-sans-serif',
+          'system-ui',
+          '-apple-system',
         ],
       },
       spacing: {
