@@ -1,6 +1,7 @@
+import { memo } from 'react';
 import theme from '../theme.json';
 
-export default function Footer() {
+function Footer() {
   return (
     <div
       className="mt-6 border-t pt-6 text-center text-sm"
@@ -20,3 +21,5 @@ export default function Footer() {
     </div>
   );
 }
+
+export default memo(Footer);
