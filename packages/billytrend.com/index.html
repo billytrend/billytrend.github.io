@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Writing, notes, and projects by Billy Trend." />
+    <meta name="color-scheme" content="light dark" />
+    <!-- Adaptive theme-color for mobile UIs -->
+    <meta name="theme-color" content="#f5f2ea" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0c0d0c" media="(prefers-color-scheme: dark)" />
+
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300..900&family=IBM+Plex+Mono:wght@400;600&family=Zen+Kaku+Gothic+Antique:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Billy Trend</title>
+
+    <!-- Prevent theme flash: set .dark early if user/system prefers -->
+    <script>
+      (function () {
+        try {
+          var stored = localStorage.getItem('theme');
+          var prefersDark =
+            window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var shouldDark = stored ? stored === 'dark' : prefersDark;
+          if (shouldDark) document.documentElement.classList.add('dark');
+        } catch (e) {}
+      })();
+    </script>
+  </head>
+  <body>
+    <a href="#content" class="skip-link">Skip to content</a>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>

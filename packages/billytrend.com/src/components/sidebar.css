@@ -1,0 +1,24 @@
+#gravatar {
+  width: 180px;
+  border-radius: 50%;
+  display: block;
+  margin: 0 auto 20px auto;
+}
+#bio {
+  margin-top: 10px;
+  margin-bottom: 15px;
+  border-top: 1px dotted #ddd;
+  border-bottom: 1px dotted #ddd;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+#bio p {
+  font-weight: 200;
+}
+#bio a {
+  font-weight: 600;
+}
+.about {
+  display: inline-block;
+  margin-bottom: 10px;
+}

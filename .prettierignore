@@ -1,0 +1,28 @@
+# dependencies
+node_modules
+packages/*/node_modules
+
+# builds
+build
+dist
+packages/*/dist
+packages/*/build
+
+# lockfiles
+pnpm-lock.yaml
+packages/*/pnpm-lock.yaml
+
+# coverage or caches
+coverage
+.cache
+.next
+
+# generated assets
+packages/billytrend.com/public/st-andrews-algol-compiler/bin/
+packages/billytrend.com/public/assets/files/
+
+# misc
+*.log
+.DS_Store
+site.json
+public
