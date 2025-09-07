@@ -7,20 +7,15 @@ export default function Sidebar() {
     : '/logo.png';
 
   return (
-    <nav className="text-sm text-sumi-muted">
+    <nav className="text-sm" aria-label="Sidebar">
       <div className="card p-6 text-center">
-        <a href="/" className="block">
-          <img src={gravatarSrc} className="w-32 h-32 rounded-full mx-auto mb-4 object-cover" alt="My photo" />
-          <p className="text-lg font-medium text-sumi">{theme.name}</p>
-          <p className="text-sm mt-1 text-sumi-muted">{theme.tagline}</p>
-          <p className="mt-3">
-            <a className="text-accent font-semibold hover:text-accent-light" href={`mailto:${theme.email}`}>{theme.email}</a>
-          </p>
+        <a href="/" className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)]">
+          <img src={gravatarSrc} className="w-32 h-32 mx-auto mb-4 object-cover border" style={{ borderColor: 'var(--line)' }} alt={`${theme.name} photo`} />
+          <p className="text-base tracking-wide" style={{ color: 'var(--text)' }}>{theme.name}</p>
         </a>
-      </div>
-
-      <div className="mt-4">
-        <a className="inline-block text-accent font-semibold hover:underline" href="/about-me.html">About Me</a>
+        <p className="mt-4">
+          <a className="font-medium focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)]" href={`mailto:${theme.email}`}>{theme.email}</a>
+        </p>
       </div>
     </nav>
   );

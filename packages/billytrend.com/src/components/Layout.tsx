@@ -6,20 +6,22 @@ import ThemeToggle from './ThemeToggle';
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <div className="min-h-screen" style={{ backgroundColor: 'var(--bg)' }}>
-      <header className="shadow-sm" style={{ backgroundColor: 'var(--card)' }}>
-        <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-          <a href="/" className="text-lg font-semibold" style={{ color: 'var(--text)' }}>Billy Trend</a>
-          <div className="hidden sm:flex gap-4 items-center">
-            <nav className="gap-4 text-sm" style={{ color: 'var(--muted)' }}>
-              <a href="/about-me.html" className="hover:underline">About</a>
-              <a href="#" className="hover:underline">Archive</a>
-            </nav>
+      <header className="border-b" style={{ backgroundColor: 'var(--bg)', borderColor: 'var(--line)' }}>
+        <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between gap-4">
+          <a
+            href="/"
+            className="text-xl font-black tracking-tight focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)]"
+            style={{ color: 'var(--text)' }}
+          >
+            Billy Trend
+          </a>
+          <div className="flex gap-3 items-center">
             <ThemeToggle />
           </div>
         </div>
       </header>
 
-      <div className="py-8">
+      <div className="py-10">
         <div className="max-w-7xl mx-auto px-6">
           {/* Grid: left sidebar, centered content, right gutter using 12 columns */}
           <div className="lg:grid lg:grid-cols-12 lg:gap-8">
@@ -29,12 +31,12 @@ export default function Layout({ children }: { children: React.ReactNode }) {
               </div>
             </aside>
 
-            <main className="lg:col-span-6">
-              <div className="rounded-lg shadow-sm p-6 transition-colors" style={{ backgroundColor: 'var(--card)', color: 'var(--text)', border: '1px solid rgba(255,255,255,0.06)' }}>
+            <main id="content" className="lg:col-span-6" role="main">
+              <div className="card p-8 transition-colors">
                 {children}
               </div>
 
-              <div className="mt-8">
+              <div className="mt-10">
                 <Footer />
               </div>
             </main>

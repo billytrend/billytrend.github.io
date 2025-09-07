@@ -6,7 +6,6 @@ export default function ThemeToggle() {
       const val = localStorage.getItem('theme');
       if (val === 'dark') return true;
       if (val === 'light') return false;
-      // fallback to system preference
       return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
     } catch {
       return false;
@@ -26,17 +25,49 @@ export default function ThemeToggle() {
 
   return (
     <button
+      type="button"
       aria-pressed={dark}
+      aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-      onClick={() => setDark((d) => !d)}
-      className="inline-flex items-center gap-2 px-3 py-1 border rounded text-sm bg-transparent"
+      onClick={(e) => {
+        const reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const doc = document as unknown as { startViewTransition?: (cb: () => void) => { finished: Promise<void> } };
+        // set wipe origin to pointer position (fallback to button center)
+        const root = document.documentElement;
+        const pointerX = (e as React.MouseEvent).clientX ?? window.innerWidth / 2;
+        const pointerY = (e as React.MouseEvent).clientY ?? 0;
+        const cx = pointerX || window.innerWidth / 2;
+        const cy = pointerY || 0;
+        root.style.setProperty('--vt-x', `${cx}px`);
+        root.style.setProperty('--vt-y', `${cy}px`);
+        const apply = () => {
+          document.documentElement.classList.add('theme-switching');
+          const root = document.documentElement;
+          const next = !root.classList.contains('dark');
+          root.classList.toggle('dark', next);
+          try { localStorage.setItem('theme', next ? 'dark' : 'light'); } catch {}
+          setDark(next);
+          // remove the guard after transition frame
+          requestAnimationFrame(() => {
+            setTimeout(() => document.documentElement.classList.remove('theme-switching'), 0);
+          });
+        };
+  if (!doc.startViewTransition || reduceMotion) { apply(); return; }
+  doc.startViewTransition(apply);
+      }}
+  className="inline-flex items-center gap-2 px-3 py-1 border text-sm bg-transparent cursor-pointer focus-visible:outline focus-visible:outline-2 focus-visible:outline-[var(--accent)]"
+  style={{ borderColor: 'var(--line)', borderRadius: '0' }}
     >
       {dark ? (
-        <span className="fas fa-sun text-yellow-300" aria-hidden />
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" className="text-yellow-400">
+          <path d="M6.76 4.84l-1.8-1.79-1.41 1.41 1.79 1.8 1.42-1.42zm10.45 14.32l1.79 1.79 1.41-1.41-1.79-1.8-1.41 1.42zM12 4V1h-1v3h1zm0 19v-3h-1v3h1zM4 12H1v1h3v-1zm19 0h-3v1h3v-1zM6.76 19.16l-1.42 1.42-1.79-1.8 1.41-1.41 1.8 1.79zM19.16 6.76l1.42-1.42 1.79 1.8-1.41 1.41-1.8-1.79zM12 6a6 6 0 100 12A6 6 0 0012 6z"/>
+        </svg>
       ) : (
-        <span className="fas fa-moon text-gray-600" aria-hidden />
+        <svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor" className="text-gray-600 dark:text-gray-300">
+          <path d="M21.752 15.002A9 9 0 1111 2.248a7 7 0 1010.752 12.754z"/>
+        </svg>
       )}
-      <span>{dark ? 'Light' : 'Dark'}</span>
+      <span className="sr-only">Toggle theme</span>
     </button>
   );
 }

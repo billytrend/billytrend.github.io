@@ -5,19 +5,22 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        paper: '#f7f4ef', // warm paper-like background
-        sumi: {
-          DEFAULT: '#111827',
-          muted: '#4b5563',
+        paper: '#f5f2ea', // warm off-white paper
+        ink: {
+          DEFAULT: '#1a1a1a',
+          muted: '#4a4a4a',
         },
+        line: '#e6e2d9', // hairlines
         accent: {
-          DEFAULT: '#4338ca', // deep indigo
-          light: '#6d28d9',
+          // muted sage/cedar accent for Japandi feel
+          DEFAULT: '#6f8364',
+          light: '#8ea383',
+          dark: '#5b6b53',
         },
       },
       fontFamily: {
-        sans: ['Noto Sans JP', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial'],
-        serif: ['Noto Serif JP', 'ui-serif', 'Georgia'],
+        sans: ['Inter', 'Zen Kaku Gothic Antique', 'ui-sans-serif', 'system-ui', '-apple-system', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial'],
+        mono: ['IBM Plex Mono', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'Liberation Mono', 'Courier New', 'monospace'],
       },
       spacing: {
         content: '65ch',
@@ -25,34 +28,38 @@ module.exports = {
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            color: theme('colors.sumi.muted'),
+            color: theme('colors.ink.muted'),
             a: {
-              color: theme('colors.accent.DEFAULT'),
-              textDecoration: 'underline',
-              textDecorationColor: 'transparent',
+              color: 'var(--accent)',
+              textDecoration: 'none',
+              borderBottom: '1px solid color-mix(in oklab, var(--accent) 40%, transparent)',
+              paddingBottom: '2px',
               '&:hover': {
-                color: theme('colors.accent.light'),
-                textDecorationColor: theme('colors.accent.DEFAULT'),
+                color: 'var(--text)',
+                backgroundImage: `linear-gradient(to right, color-mix(in oklab, var(--accent) 12%, transparent), transparent)`
               },
             },
             h1: {
-              color: theme('colors.sumi.DEFAULT'),
+              color: theme('colors.ink.DEFAULT'),
               fontWeight: '800',
+              letterSpacing: '-0.02em',
             },
             h2: {
-              color: theme('colors.sumi.DEFAULT'),
+              color: theme('colors.ink.DEFAULT'),
               fontWeight: '700',
+              letterSpacing: '-0.01em',
             },
             blockquote: {
-              borderLeftColor: theme('colors.gray.200'),
-              color: theme('colors.sumi.muted'),
+              borderLeftColor: theme('colors.line'),
+              color: theme('colors.ink.muted'),
               fontStyle: 'normal',
               backgroundColor: 'transparent',
             },
             code: {
-              backgroundColor: theme('colors.gray.100'),
+              backgroundColor: 'color-mix(in oklab, var(--text) 8%, transparent)',
               padding: '0.125rem 0.25rem',
-              borderRadius: '0.25rem',
+              borderRadius: '0',
+              fontFamily: theme('fontFamily.mono').join(','),
             },
           },
         },
