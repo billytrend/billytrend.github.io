@@ -239,15 +239,15 @@ samp {
 ::view-transition-new(root) {
   --vt-soft: 40px;
   --vt-radius: 0px;
-  animation: theme-wipe 2000ms var(--expo-out, ease);
+  animation: theme-wipe 1000ms var(--expo-out, ease);
   -webkit-mask-image: radial-gradient(
-    circle at var(--vt-x, 50%) var(--vt-y, 0),
+    circle at var(--vt-x, 100%) var(--vt-y, 0),
     #000 0,
     #000 calc(var(--vt-radius) - var(--vt-soft)),
     rgba(0, 0, 0, 0) var(--vt-radius)
   );
   mask-image: radial-gradient(
-    circle at var(--vt-x, 50%) var(--vt-y, 0),
+    circle at var(--vt-x, 100%) var(--vt-y, 0),
     #000 0,
     #000 calc(var(--vt-radius) - var(--vt-soft)),
     rgba(0, 0, 0, 0) var(--vt-radius)
@@ -263,7 +263,7 @@ samp {
   pointer-events: none;
 }
 .dark::view-transition-new(root) {
-  animation: theme-wipe 2000ms var(--expo-out, ease);
+  animation: theme-wipe 1000ms var(--expo-out, ease);
 }
 @keyframes theme-wipe {
   to {

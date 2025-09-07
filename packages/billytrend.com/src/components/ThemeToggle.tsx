@@ -29,18 +29,16 @@ export default function ThemeToggle() {
       aria-pressed={dark}
       aria-label={dark ? 'Switch to light mode' : 'Switch to dark mode'}
       title={dark ? 'Switch to light mode' : 'Switch to dark mode'}
-      onClick={(e) => {
+      onClick={() => {
         const reduceMotion =
           window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         const doc = document as unknown as {
           startViewTransition?: (cb: () => void) => { finished: Promise<void> };
         };
-        // set wipe origin to pointer position (fallback to button center)
+        // set wipe origin to top-right corner
         const root = document.documentElement;
-        const pointerX = (e as React.MouseEvent).clientX ?? window.innerWidth / 2;
-        const pointerY = (e as React.MouseEvent).clientY ?? 0;
-        const cx = pointerX || window.innerWidth / 2;
-        const cy = pointerY || 0;
+        const cx = window.innerWidth; // 100% X
+        const cy = 0; // 0% Y (top)
         root.style.setProperty('--vt-x', `${cx}px`);
         root.style.setProperty('--vt-y', `${cy}px`);
         const apply = () => {
