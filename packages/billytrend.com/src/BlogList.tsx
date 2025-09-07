@@ -7,7 +7,10 @@ type MdxModule = { default: ComponentType; frontmatter?: Frontmatter; meta?: Fro
 type PostEntry = { path: string; meta: Frontmatter; Content: ComponentType };
 
 const postModules = import.meta.glob<MdxModule>('./posts/*.mdx');
-const rawModules = import.meta.glob<string>('./posts/*.mdx', { as: 'raw' });
+const rawModules = import.meta.glob<string>('./posts/*.mdx', {
+  query: '?raw',
+  import: 'default',
+});
 
 function BlogList() {
   const [posts, setPosts] = useState<PostEntry[]>([]);

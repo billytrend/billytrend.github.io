@@ -49,5 +49,16 @@ function dirIndexPlugin(): Plugin {
 
 // https://vite.dev/config/
 export default defineConfig({
+  appType: 'spa',
   plugins: [react(), mdx(), tailwindcss(), dirIndexPlugin()],
+  server: {
+    // Ensure that unknown routes fall back to index.html during dev
+    fs: { strict: true },
+  },
+  preview: {
+    // Vite preview respects appType: 'spa' and serves index.html fallback
+  },
+  build: {
+    // Let static hosting serve 404s to index.html; Cloudflare Worker already handles SPA fallback
+  },
 });

@@ -1,11 +1,11 @@
-import { HashRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import BlogList from './BlogList';
 import PostPage from './pages/Post';
 import Layout from './components/Layout';
 
 function App() {
   return (
-    <HashRouter>
+    <BrowserRouter>
       <Layout>
         <Routes>
           <Route path="/" element={<BlogList />} />
@@ -13,7 +13,7 @@ function App() {
           <Route path="*" element={<BlogList />} />
         </Routes>
       </Layout>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
 
